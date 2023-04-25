@@ -1,7 +1,7 @@
 # Template Literal
 
 <aside>
-💡 여기서 **Literal** 이란 **정보를 표현하는 방법, 기호이다.**
+💡 여기서 Literal 이란 정보를 표현하는 방법, 기호이다.
 
 </aside>
 
@@ -15,7 +15,7 @@ var letter = name+ ' jeongyun ' + name + '\n\njooeun hi jumi ' + name + ' ain';
 console.log(letter);
 ```
 
-1. **문자열 시작 부분에 ‘ 가 아닌 `를 사용해주고 ${ `변수명`}으로 변수를 감싸준 뒤 줄바꿈을 하고싶은 부분에는 그냥 enter를 쳐준다.**
+1. **문자열 시작 부분에 ‘ 가 아닌 ` 를 사용해주고 ${변수명}으로 변수를 감싸준 뒤 줄바꿈을 하고싶은 부분에는 그냥 enter를 쳐준다.**
 
 ```jsx
 var name = 'hi'
