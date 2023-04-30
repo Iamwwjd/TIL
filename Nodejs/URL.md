@@ -4,7 +4,6 @@
 ![2.png](image/2.png)
 
 ![3.png](image/3.png)
->>>>>>> 36a76c383a7eb67b757ec980e0053b2739aa3267
 
 main.js를 실행했을때 나오는 각각의 정보들은 n.html과 같은 정적인 파일들을 가져오고 있다. 
 
@@ -44,7 +43,6 @@ main.js를 실행했을때 나오는 각각의 정보들은 n.html과 같은 정
 
 =======
  *query string의 앞은 ? 를 쓰고, 값과 값은 &을 쓰고, 값의 이름과 값은 = 로 구분해야한다.*
->>>>>>> 36a76c383a7eb67b757ec980e0053b2739aa3267
 
 이제 query string에 따라 다른 정보를 보여주는 것을 해보겠다
 
@@ -109,9 +107,34 @@ var template = `<!doctype html>
 `
     response.end(template);
 ```
-
 2.HTML 코드를 복붙하고 제목이 있는 곳에 [`queryData.id`](http://queryData.id) 를 넣은 변수를 추가해준다.
 
 이를 실행시키려면 response.end도 [`queryData.id`](http://queryData.id) 가 아닌 변수명인 `template` 을 넣어주어야 한다.
 
+queryData.id 가 각각 HTML, CSS, JavaScript 일때 위 페이지가 나오도록 수정해준다.
+
+처음 들어갔을때 페이지를 index.html이 아닌 “/”로 바꿔주었는데 이를 바꿀때는 위 코드 조건문을
+
+```jsx
+ if(_url == '/'){
+        title = 'Welcome';
+    }
+```
+
+이렇게 수정해주어야지 사이트에 접속했을때 Welcome이 뜨게 된다.
+
 이를 실행시키면
+
+![스크린샷 2023-04-27 오후 7.57.52.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ef1ad931-5678-4116-9fc2-f86b6e061795/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-04-27_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_7.57.52.png)
+
+queryData.id값이 제목으로 출력되는 것을 볼 수 있다.
+
+```jsx
+<ol>
+    <li><a href="/?id=HTML">HTML</a></li>
+    <li><a href="/?id=CSS">CSS</a></li>
+    <li><a href="/?id=JavaScript">JavaScript</a></li>
+  </ol>
+```
+
+<ol> 을 <ul>로 바꿔주면 안에 있는 문장들이 순서가 없는 리스트로 변하게 된다.
