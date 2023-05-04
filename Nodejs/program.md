@@ -21,3 +21,23 @@ console.log('B');
 console.log('C2');
 console.log('D');
 ```
+
+하지만 실행해야할 파일의 양이 그하급수적으로 많아지게 된다면 굉장히 불편할 것이다.
+
+우리는 이를 편리하게 사용하기 위해 조건문을 사용한다.
+
+### Conditional statements
+
+**if문**
+
+```jsx
+console.log('A');
+console.log('B');
+if(true) {
+    console.log('C1');
+}
+if(false) {
+    console.log('C2');
+}
+console.log('D');
+```
