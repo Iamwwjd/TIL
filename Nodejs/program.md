@@ -51,4 +51,38 @@ Url {
 
 우리는 pathname이 필요하기 때문에 `var pahtname = url.parse(_url,true).pathname;`을 넣어준다.
 
-이를 활용하여
+이를 활용하여 아래 조건문을 작성해준다.
+
+```jsx
+if (pahtname === '/') {
+      fs.readFile(`data/${queryData.id}`, 'utf8', function (err, description) {
+          var template = ` <!doctype html>
+<html>
+<head>
+  <title>WEB1 - ${title}</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <h1><a href="/">WEB</a></h1>
+  <ul>
+    <li><a href="/?id=HTML">HTML</a></li>
+    <li><a href="/?id=CSS">CSS</a></li>
+    <li><a href="/?id=JavaScript">JavaScript</a></li>
+  </ul>
+  <h2>${title}</h2>
+  <p>${description}</p>
+</body>
+</html>
+ `;
+          response.writeHead(200);
+          response.end(template);
+      })
+  } else {
+      response.writeHead(404);
+      response.end('not found'); // 파일을 찾을 수 없다
+  }
+```
+
+현 접속이 path가 없는 경로로 접속했다면 if 안에 있는 코드를 실행하고
+
+그 외(else)로 접속을 했다면 error를 띄워준다.
