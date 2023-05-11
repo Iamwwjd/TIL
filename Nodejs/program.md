@@ -86,3 +86,75 @@ if (pahtname === '/') {
 현 접속이 path가 없는 경로로 접속했다면 if 안에 있는 코드를 실행하고
 
 그 외(else)로 접속을 했다면 error를 띄워준다.
+
+```jsx
+var http = require('http');
+var fs = require('fs');
+var url = require('url');
+
+var app = http.createServer(function(request,response) {
+    var _url = request.url;
+    var queryData = url.parse(_url, true).query;
+    var pathname = url.parse(_url, true).pathname;
+    var title = queryData.id;
+
+    if (pathname === '/') {
+        if (queryData.id === undefined) {
+            fs.readFile(`data/${queryData.id}`, 'utf8', function (err, description) {
+                var template = `<!doctype html>
+<html>
+<head>
+  <title>WEB1 - ${title}</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <h1><a href="/">WEB</a></h1>
+  <ul>
+    <li><a href="/?id=HTML">HTML</a></li>
+    <li><a href="/?id=CSS">CSS</a></li>
+    <li><a href="/?id=JavaScript">JavaScript</a></li>
+  </ul>
+  <h2>${title}</h2>
+  <p>${description}</p>
+</body>
+</html>
+ `;
+                response.writeHead(200);
+                response.end(template);
+            });
+        } else {
+            fs.readFile(`data/${queryData.id}`, 'utf8', function (err, description) {
+                var template = `<!doctype html>
+<html>
+<head>
+  <title>WEB1 - ${title}</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <h1><a href="/">WEB</a></h1>
+  <ul>
+    <li><a href="/?id=HTML">HTML</a></li>
+    <li><a href="/?id=CSS">CSS</a></li>
+    <li><a href="/?id=JavaScript">JavaScript</a></li>
+  </ul>
+  <h2>${title}</h2>
+  <p>${description}</p>
+</body>
+</html>
+ `;
+                response.writeHead(200);
+                response.end(template);
+            });
+        }
+    } else {
+        response.writeHead(404);
+        response.end('not found');
+    }
+});
+
+app.listen(3000);
+```
+
+조건문을 사용한 웹 페이지 구현을 알아보았다. 
+
+undefined = 정의되지 않은 데이터 키워드.
