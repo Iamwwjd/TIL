@@ -114,3 +114,43 @@ else {
 }
 console.log('D');
 ```
+
+### Loop statements
+
+반복문
+
+우리가 어떠한 상황에서 같은 구문을 반복해 출력해야할 상황이 생길때
+
+```jsx
+console.log('A');
+console.log('B');
+console.log('C1');
+console.log('C2');
+console.log('C1');
+console.log('C2');
+console.log('C1');
+console.log('C2');
+console.log('D');
+```
+
+단순히 여러번 출력을 하는 방법도 있지만 이는 출력해야할 수가 늘어나면 코드가 지저분해진다.
+
+**While 문**
+
+기본 형식
+
+```jsx
+// While (Boolean){반복하여 출력할 값}
+
+console.log('A');
+console.log('B');
+
+While () {
+console.log('C1');
+console.log('C2');
+}
+
+console.log('D');
+```
+
+while의 boolean이 ture 일 때, 반복 구간이 무한출력 된다. *조심!*
