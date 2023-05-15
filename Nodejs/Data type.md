@@ -134,3 +134,24 @@ console.log(arr);
 
 A 3 C D Eㄷ
 ```
+
+
+### Array & loop
+
+배열과 반복문을 같이 쓰면 유용하게 사용이 가능하다.
+
+```jsx
+var number = [1, 50, 4, 700, 11];
+var i = 0;
+var total = 0;
+
+while(i < 5){
+    total = total + num[i];
+    i = i + 1;
+}
+console.log (`total : ${total}`)
+```
+
+위와 같이 반복문과 배열을 같이 사용하게 되면
+
+반복문이 끝난 후 콘솔에 변수 number 값의 합이 출력되게 된다.
