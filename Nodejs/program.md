@@ -162,3 +162,31 @@ undefined = 정의되지 않은 데이터 키워드.
 =======
 그 외(else)로 접속을 했다면 error를 띄워준다.
 >>>>>>> 291b8edc765ea3da3d84d63ecbba8bdd416d8f07
+
+### 파일목록 알아내기
+
+**fs.readdir**
+
+```jsx
+const testFolder = './tests/';
+const fs = require('fs') // const는 아직 안배웠으니 var로 변경해서 사용
+
+fs.readdir (testFolder, (err, files) => {
+	files.forEach(file => {
+		console.log(file);
+	});
+}) // 이건 예제이고 필요없는 부분은 잘라서 사용
+```
+
+readdir.js file을 만들어 아래 코드를 적어준다
+
+```jsx
+var testFolder = './data'; 
+var fs = require('fs')
+
+fs.readdir (testFolder, function (error,filelist){
+    console.log(filelist)
+})
+```
+
+이를 실행하면 data에 있는 파일의 목록을 배열로 만들어서 내놓는다.
