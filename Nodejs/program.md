@@ -190,3 +190,89 @@ fs.readdir (testFolder, function (error,filelist){
 ```
 
 이를 실행하면 data에 있는 파일의 목록을 배열로 만들어서 내놓는다.
+
+### 글 목록 출력하기
+
+```jsx
+<ul>
+    <li><a href="/?id=HTML">HTML</a></li>
+    <li><a href="/?id=CSS">CSS</a></li>
+    <li><a href="/?id=JavaScript">JavaScript</a></li>
+  </ul>
+```
+
+위 코드를 파일 목록으로 바꾸어 보겠다.
+
+```jsx
+var title = 'Welcome';
+                var discription = 'Hello Node.js';
+                var template = `<!doctype html>
+<html>
+<head>
+  <title>WEB1 - ${title}</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <h1><a href="/">WEB</a></h1>
+  <ul>
+    <li><a href="/?id=HTML">HTML</a></li>
+    <li><a href="/?id=CSS">CSS</a></li>
+    <li><a href="/?id=JavaScript">JavaScript</a></li>
+  </ul>
+  <h2>${title}</h2>
+  <p>${description}</p>
+</body>
+</html>
+ `;
+                response.writeHead(200);
+                response.end(template);
+```
+
+이 코드를 파일 목록을 가져오는 코드로 감싸준다
+
+```jsx
+var fs = require('fs');
+
+fs.readdir('./data', function (error, filelist){
+            console.log(filelist);
+        })
+```
+
+이를 실행하면 data 폴더에 있는 파일 `[ 'CSS', 'HTML', 'JavaScript']` 이 출력된다.
+
+이를 붙여넣기 하고 <ul> 코드를 삭제 한 후 변수인 `list` 로 바꿔준다 
+
+그리고 위 쪽에 list 변수를 만들어준다.
+
+`list`
+
+```jsx
+var list = '<ul>';
+
+            var i = 0; // 변수 지정
+            while(i < filelist.length){ // i가 filelist의 length보다 작을때까지
+                list = list + '<li>${filelist[i]}</li>'; // list 증가d
+                i = i+1; // i 증가
+            }
+
+list = list + '</ul>'; // list의 시작과 끝은 <ul> 이다.
+```
+
+이걸 실행시킨다면 파일의 목록이 출력 될 것이다. 
+
+```jsx
+var list = '<ul>';
+
+            var i = 0;
+            while(i < filelist.length){
+                list = list + '<li><a href = "/?id=${filelist[i]}" >${filelist[i]}</a></li>';
+                i = i+1;
+            }
+
+            list = list + '</ul>';
+            var template = `<!doctype html>
+```
+
+<a> 태그를 사용해 링크를 걸어준다.
+
+main.js 에서 else 아래에 있는 코드는 id 값이 있을 때 실행 되는 코드이기 때문에 위 코드를 copy 해서 똑같이 적용시켜 준다.
