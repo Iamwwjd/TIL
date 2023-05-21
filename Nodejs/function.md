@@ -51,3 +51,51 @@ function sum(first, second){
 		console.log('b'); // 리턴이 되면 그 즉시 함수의 계산이 끝나기 때문에 실행이 안된다.
 }
 ```
+
+### 함수를 이용한 정리
+
+코드가 많아지면 코드가 복잡해지며 관리가 힘들어지고 가독성이 낮아진다.
+
+main.js에서 중복되는 부분의 코드를 함수로 만들어준다.
+
+```jsx
+function templateHTML(){
+    return `<!doctype html>
+
+    <html>
+    <head>
+    <title>WEB1 - ${title}</title>
+    <meta charset="utf-8">
+    </head>
+    <body>
+    <h1><a href="/">WEB</a></h1>
+    ${list}
+    ${body} // <h2>${title}</h2>${discription}을 ${}로 묶어준다.
+    </body>
+</html>
+    `;
+}
+
+var template = templateHTML(title, list, `<h2>${title}</h2>${discription}`);
+```
+
+또 중복되는 부분이 없는지 확인하고 함수로 만들어준다.
+
+```jsx
+function templateList(filelist){
+    var list = '<ul>';
+
+    var i = 0;
+    while(i < filelist.length){
+        list = list + `<li><a ' +
+                    'href ="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
+        i = i+1;
+    }
+
+    list = list + '</ul>';
+
+    return list;
+}
+
+var list = templateList(filelist);
+```
