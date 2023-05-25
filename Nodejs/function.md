@@ -59,7 +59,7 @@ function sum(first, second){
 main.js에서 중복되는 부분의 코드를 함수로 만들어준다.
 
 ```jsx
-function templateHTML(){
+function templateHTML(title, list, body){
     return `<!doctype html>
 
     <html>
@@ -70,7 +70,7 @@ function templateHTML(){
     <body>
     <h1><a href="/">WEB</a></h1>
     ${list}
-    ${body} // <h2>${title}</h2>${discription}을 ${}로 묶어준다.
+    ${body} // <h2>${title}</h2>${description}을 ${}로 묶어준다.
     </body>
 </html>
     `;
