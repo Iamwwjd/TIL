@@ -25,3 +25,15 @@
 서버로 부터 사용자가 데이터를 가져올때는 `method = “gety” 혹은 method 생략` 로 바꿔주어야 한다.
 
 하지만 서버의 데이터를 cud 할때는 꼭 post 방식으로 해야한다!!
+
+서버로 부터 사용자가 데이터를 가져올때는 `method = “gety” 혹은 method 생략` 로 바꿔주어야 한다.
+
+하지만 서버의 데이터를 cud 할때는 꼭 post 방식으로 해야한다!!
+
+글을 쓸 수 있는 경로로 가는 링크 만들기
+
+`templateHTML` 함수에
+
+```jsx
+<a href ="/create">create</a> // create를 누르면 create 페이지로 넘어감
+```
