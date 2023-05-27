@@ -37,3 +37,32 @@
 ```jsx
 <a href ="/create">create</a> // create를 누르면 create 페이지로 넘어감
 ```
+
+if 에 있는 아래 코드를
+
+```jsx
+fs.readdir('./data', function (error, filelist) {
+                var title = 'Welcome';
+                var description = 'Hello Node.js';
+
+                var list = templateList(filelist);
+                var template = templateHTML(title, list, `<h2>${title}</h2>${description}`);
+                response.writeHead(200);
+                response.end(template);
+            })
+```
+
+아래쪽에 else if를 만들어 넣어준다.
+
+```jsx
+else if(pathname == '/create'){
+        fs.readdir('./data', function (error, filelist) {
+            var title = 'Welcome';
+            var description = 'Hello Node.js';
+
+            var list = templateList(filelist);
+            var template = templateHTML(title, list, `<h2>${title}</h2>${description}`);
+            response.writeHead(200);
+            response.end(template);
+        })
+```
