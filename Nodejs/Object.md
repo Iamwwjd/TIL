@@ -52,3 +52,45 @@ for (var name in roles){
     console.log(roles[name]);
 } // 060504 Jeongyun
 ```
+
+### 객체_값으로서의 함수
+
+**`OOP` - Object Oriented Programming**
+
+우리가 프로그래밍을 한다 라는 것은 데이터와 데이터를 처리하는것으로 이루어져 있다고 해도 과언이 아니다. 
+
+그리고 우리는 함수를 이용하여 연관되어있는 처리방법들에 이름을 붙여 다른 것들과 구분시킨다.
+
+자바스크립트에서의 함수는 독특한 특성을 가지고 있는데
+
+처리하는 일에 대한 정보를 담고있는 일종의 statement라고 할 수 있으면서 동시에 값을 뜻한다.
+
+```jsx
+var i = if(true){console.log('A')} => 오류
+
+var w = while(true){console.log('B')}; => 오류
+
+var f = function (){
+    console.log('C');
+}
+console.log(f);
+f(); => 실행 - C 출력
+```
+
+이처럼 다른 statment들과 다르게 변수로 값을 지정하고 출력할 수 있다.
+
+```jsx
+var f = function (){
+    console.log('C');
+}
+var v = [f]; // 변수로 f를 배열로 지정
+v[0](); // v[0]의 값은 f 이기 때문에 함수 실행
+
+var o = {
+    func:f // func는 객체의 원소이다. func로 f를 준다.
+}
+	o.func; // 함수 실행
+
+C
+C
+```
