@@ -147,3 +147,43 @@ function f2(){
 p.f1(); //각 함수가 실행됨
 p.f2();
 ```
+
+**함수를 만들때 보통 접두사, 접미사를 통해 함수의 이름을 정한다. 이는 성격이 같은 것들을 그룹핑 하기 위해서이다.**
+
+객체를 통해 그룹핑 하는 방법
+
+```jsx
+var template = {
+    html : function (title, list, body){
+        return `
+    <!doctype html>
+    <html>
+    <head>
+    <title>WEB1 - ${title}</title>
+    <meta charset="utf-8">
+    </head>
+    <body>
+    <h1><a href="/">WEB</a></h1>
+    ${list}
+    <h3><a href ="/create">create</a></h3>
+    ${body}
+    </body>
+    </html>
+    `;
+    },
+    list : function (filelist){
+        var list = '<ul>';
+
+        var i = 0;
+        while(i < filelist.length){
+            list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
+            i = i+1;
+        }
+
+        list = list + '</ul>';
+        return list;
+    }
+}
+```
+
+**함수 `templateList`와 `templateHTML` 을 template이라는 객체로 묶었다.**
