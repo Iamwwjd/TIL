@@ -154,7 +154,7 @@ p.f2();
 
 ```jsx
 var template = {
-    html : function (title, list, body){
+    HTML : function (title, list, body){
         return `
     <!doctype html>
     <html>
@@ -187,3 +187,143 @@ var template = {
 ```
 
 **함수 `templateList`와 `templateHTML` 을 template이라는 객체로 묶었다.**
+
+**사용하는 방법**
+
+```jsx
+객체를 사용할때는 
+
+수정 전
+var list = templateList(filelist);
+var template = templateHTML(title, list, `<h2>${title}</h2>${description}`);
+
+수정 후
+var list = template.List(filelist); 가운데에 .을 붙여 사용한다.
+var html = template.HTML(title, list, `<h2>${title}</h2>${description}`);
+```
+
+모든 코드를 수정해준다.
+
+```jsx
+var http = require('http');
+var fs = require('fs');
+var url = require('url');
+
+var template = {
+    HTML : function (title, list, body){
+        return `
+    <!doctype html>
+    <html>
+    <head>
+    <title>WEB1 - ${title}</title>
+    <meta charset="utf-8">
+    </head>
+    <body>
+    <h1><a href="/">WEB</a></h1>
+    ${list}
+    <h3><a href ="/create">create</a></h3>
+    ${body}
+    </body>
+    </html>
+    `;
+    },
+    List : function (filelist){
+        var list = '<ul>';
+
+        var i = 0;
+        while(i < filelist.length){
+            list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
+            i = i+1;
+        }
+
+        list = list + '</ul>';
+        return list;
+    }
+}
+function templateHTML(title, list, body){
+    return `
+    <!doctype html>
+    <html>
+    <head>
+    <title>WEB1 - ${title}</title>
+    <meta charset="utf-8">
+    </head>
+    <body>
+    <h1><a href="/">WEB</a></h1>
+    ${list}
+    <h3><a href ="/create">create</a></h3>
+    ${body}
+    </body>
+    </html>
+    `;
+}
+
+function templateList(filelist){
+    var list = '<ul>';
+
+    var i = 0;
+    while(i < filelist.length){
+        list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
+        i = i+1;
+    }
+
+    list = list + '</ul>';
+    return list;
+}
+
+var app = http.createServer(function(request,response) {
+    var _url = request.url;
+    var queryData = url.parse(_url, true).query;
+    var pathname = url.parse(_url, true).pathname;
+    var title = queryData.id;
+
+    if (pathname === '/') { // home 으로 갔냐
+        if (queryData.id === undefined) {
+
+            fs.readdir('./data', function (error, filelist) {
+                var title = 'Welcome';
+                var description = 'Hello Node.js';
+
+                var list = template.List(filelist);
+                var html = template.HTML(title, list, `<h2>${title}</h2>${description}`);
+                response.writeHead(200);
+                response.end(html);
+            })
+
+        } else {
+            fs.readdir('./data', function (error, filelist) {
+                fs.readFile(`data/${queryData.id}`, 'utf8', function (err, description) {
+                    var title = queryData.id;
+                    var list = template.List(filelist);
+                    var html = template.HTML(title, list, `<h2>${title}</h2>${description}`);
+                    response.writeHead(200);
+                    response.end(html);
+                });
+            });
+        }
+    } else if(pathname === '/create'){
+        fs.readdir('./data', function (error, filelist) {
+            var title = 'Web - create';
+            var list = template.List(filelist);
+            var html = template.HTML(title, list, `
+            <form action="http://localhost:3000/create_process" method="post">
+             <p><input type = "text" name = "title" placeholder="title"></p>
+             <p><textarea name = "description" placeholder="description"> </textarea></p>
+
+             <p>
+                <input type = "submit">
+             </p>
+            </form>
+            `);
+            response.writeHead(200);
+            response.end(html);
+        })
+    }
+         else {
+            response.writeHead(404);
+            response.end('not found');
+        }
+    });
+
+    app.listen(3000);
+```
