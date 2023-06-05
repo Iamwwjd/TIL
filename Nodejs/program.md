@@ -322,3 +322,5 @@ else if(pathname === '/create'){
 ```
 
 `placeholder` 는 사용자가 어떤 입력값을 적어야하는지 알려주는 용도로 사용한다.
+
+`refactoring` 동작방법은 똑같이 유지하면서  내부 코드는 효율적으로 바꾸는 것
