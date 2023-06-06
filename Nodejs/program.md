@@ -324,3 +324,44 @@ else if(pathname === '/create'){
 `placeholder` 는 사용자가 어떤 입력값을 적어야하는지 알려주는 용도로 사용한다.
 
 `refactoring` 동작방법은 똑같이 유지하면서  내부 코드는 효율적으로 바꾸는 것
+
+사용자가 form으로 정보를 전송할때 post 방식으로 전달함 → 이 데이터를 node.js안에서 가져오기 위해서는?
+
+```jsx
+requst.on() 사용 이유
+웹브라우저가 post방식으로 데이터를 전송할때 많은 데이터를 처리하다 무리가 가는 문제점이 생긴다. -> 전송 되는 데이터가 많을때를 대비하여 일정량의 데이터를 수신할때마다 callback함수를 호출한다.
+
+request.on('data', function (data){
+            body = body + data;
+        }); // bodydata에 callback이 실행될때마다 data를 추가해준다. 
+
+정보가 들어오다가 들어올 정보가 없으면 `request.on('end', function)`에 해당되는 callback이 실행될때 정보 수신이 끝났다고 생각한다.
+
+코드 윗줄에
+var qs = require('querystring') 를 추가해주고
+request.on('end', function (){
+   var post = qs.parse(body); // post data의 post data가 들어있을 것
+});
+
+console.log(post.title); -> tilte의 값이 node.js가 됨
+console.log(post.description) -> 본문이 된다.
+```
+
+완성코드
+
+```jsx
+else if(pathname === '/create_process'){
+        var body = '';
+        request.on('data', function (data){
+            body = body + data;
+        });
+        request.on('end', function (){
+            var post = qs.parse(body);
+            var title = post.title;
+            var description = post.description;
+            console.log(post.title);
+        });
+        response.writeHead(200);
+        response.end('success');
+    } // 실행을 하면 node가 콘솔창에 뜸
+```
