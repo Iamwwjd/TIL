@@ -365,3 +365,11 @@ else if(pathname === '/create_process'){
         response.end('success');
     } // 실행을 하면 node가 콘솔창에 뜸
 ```
+
+```jsx
+301 - 위 주소로 영원히 바뀜 -> 앞으로는 위 주소로 오라는 뜻
+200 - 성공
+302 - 페이지를 다른곳으로 이동시키는 뜻
+
+response.writeHead(302, {location: `/?id=${title}`}); //페이지가 잘 넘어간다.
+```
