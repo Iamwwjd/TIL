@@ -373,3 +373,31 @@ else if(pathname === '/create_process'){
 
 response.writeHead(302, {location: `/?id=${title}`}); //페이지가 잘 넘어간다.
 ```
+
+---
+
+`create` 버튼 옆에 `update` 버튼을 만들어준다.
+
+```jsx
+${list}
+    <h3><a href ="/create">create</a></h3> <h3><a href = "/update">update</a></h3> // create
+${body}
+```
+
+각 if문의 html 변수에 control을 추가해준다.
+
+`if (pathname === '/')` (홈) 
+
+```jsx
+var html = template.HTML(title, list,
+                    `<h2>${title}</h2>${description}`, 
+                    `<h3><a href ="/create">create</a></h3>`);
+```
+
+`else` (id값 선택)
+
+```jsx
+var html = template.HTML(title, list, 
+							`<h2>${title}</h2>${description}`,
+              `<h3><a href ="/create">create</a></h3> <h3><a href = "/update?id=${title}">update</a></h3>`);
+```
