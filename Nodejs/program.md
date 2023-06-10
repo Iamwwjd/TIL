@@ -413,21 +413,24 @@ else if (pathname === '/update'){
         fs.readdir('./data', function (error, filelist) {
             fs.readFile(`data/${queryData.id}`, 'utf8', function (err, description) {
                 var title = queryData.id;
-                var list = template.List(filelist);
+                var list = template.list(filelist);
                 var html = template.HTML(title, list, `
                  <form action="/update_process" method="post">
-             <p><input type = "text" name = "title" placeholder="title" value="${title}"></p>
-             <p><textarea name = "description" placeholder="description">${description} </textarea></p>
+                    <input type="hidden" name="id" value="${title}>"
+                    <p><input type = "text" name = "title" placeholder="title" value="${title}"></p>
+                    <p><textarea name = "description" 
+                    placeholder="description">${description} </textarea>
+                    </p>
 
-             <p>
-                <input type = "submit">
-             </p>
-            </form>
+                     <p>
+                        <input type = "submit">
+                     </p>
+                 </form>
                 `,
                     `<h3><a href ="/create">create</a></h3> <h3><a href = "/update?id=${title}">update</a></h3>`);
                 response.writeHead(200);
                 response.end(html);
             });
         });
-    }
+}
 ```
