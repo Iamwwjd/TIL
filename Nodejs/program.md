@@ -434,3 +434,23 @@ else if (pathname === '/update'){
         });
 }
 ```
+
+---
+
+삭제버튼 구현
+
+```jsx
+else {
+            fs.readdir('./data', function (error, filelist)
+.
+.
+.
+					<form action="delete_process" method="post"> // 반드시 post방식으로 보낸다.
+                            <input type="hidden" name="id" value="${title}"> // gidden -> 보이지않게
+                            <input type="submit" value="delete">
+                            </form>`);
+```
+
+프로그램에서 update 버튼을 누르면 update page로 이동하지만,  delete 버튼을 눌렀을때는 
+
+페이지 이동을 하지 않고 바로 삭제한다.→ 삭제버튼을 링크로 만들면 안된다. → form으로 만든다.
