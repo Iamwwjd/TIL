@@ -454,3 +454,20 @@ else {
 프로그램에서 update 버튼을 누르면 update page로 이동하지만,  delete 버튼을 눌렀을때는 
 
 페이지 이동을 하지 않고 바로 삭제한다.→ 삭제버튼을 링크로 만들면 안된다. → form으로 만든다.
+
+```jsx
+else if(pathname === '/delete_process'){
+        var body = '';
+        request.on('data', function (data) {
+            body = body + data;
+        });
+        request.on('end', function(){
+            var post = qs.parse(body);
+            var id = post.id;
+            fs.unlink(`data/${id}`, function(error){
+                response.writeHead(302, {Location:`/`});
+                response.end();
+            })
+        });
+    }
+```
