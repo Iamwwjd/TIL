@@ -17,6 +17,7 @@ var roles = {
     'name' : 'Jeongyun'
 }
 console.log(roles.name) // Jeongyun
+console.log(roles['name') // Jeongyun
 
 배열은 []를 쓰고 객체는 {}를 쓴다.
 ```
@@ -154,7 +155,7 @@ p.f2();
 
 ```jsx
 var template = {
-    HTML : function (title, list, body){
+    html : function (title, list, body){
         return `
     <!doctype html>
     <html>
@@ -289,9 +290,7 @@ var app = http.createServer(function(request,response) {
                     `<h3><a href ="/create">create</a></h3>`);
                 response.writeHead(200);
                 response.end(html);
-            })
-
-
+            });
         } else {
             fs.readdir('./data', function (error, filelist) {
                 fs.readFile(`data/${queryData.id}`, 'utf8', function (err, description) {
@@ -304,7 +303,8 @@ var app = http.createServer(function(request,response) {
                                 <form action="delete_process" method="post">
                                     <input type="hidden" name="id" value="${title}">
                                     <input type="submit" value="delete">
-                                   </form>`);
+                                   </form>`
+                    );
                     response.writeHead(200);
                     response.end(html);
                 });
@@ -381,7 +381,10 @@ var app = http.createServer(function(request,response) {
         });
     } else if(pathname === '/delete_process'){
         var body = '';
-        request.on('data', function (){
+        request.on('data', function (data) {
+            body = body + data;
+        });
+        request.on('end', function(){
             var post = qs.parse(body);
             var id = post.id;
             fs.unlink(`data/${id}`, function(error){
