@@ -2,20 +2,7 @@
 
 =======
 ![2.png](image/2.png)
-
-![3.png](image/3.png)
-
-main.js를 실행했을때 나오는 각각의 정보들은 n.html과 같은 정적인 파일들을 가져오고 있다. 
-
-→ 만약 1억개의 페이지를 가져온다면 1억개의 정적인 파일이 있어야 한다는 뜻.
-
-그에 반해, 위 웹페이지를 보면 aritcle 라는 서로 같은 파일을 가지고 있음에도 불구하고 뒤쪽 값을 다르게 하는 것을 통해 클라이언트에게 서로 다른 페이지를 만들어 보내고 있다.
-
-![mnews:422.png](image/mnews:422.png)
-
-![mnews:214.png](image/mnews:214.png)
-
-이를 알려면 URL에 형식에 대해 자세히 알아야 하는데 
+URL의 형식
 
 ### [http://opentutorials.org](http://opentutorials.org):3000/main?id-HTML&page=12
 
