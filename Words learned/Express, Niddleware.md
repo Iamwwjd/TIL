@@ -73,3 +73,94 @@ app.use(morgan('dev')); // 로그를 개발용(dev) 포맷으로 출력
 
 // 미들웨어 등록 후 라우트 및 애플리케이션 로직 작성
 ```
+
+helmet
+
+다양한 보안 관련 HTTP 헤더를 설정하여 애플리케이션의 보안 수준을 높인다.
+
+기본적인 보안 설정을 제공하여 개발자가 별도의 설정을 수행하지 않아도 안전한 기본구성을 갖ㅊㄹ 수 있다. 
+
+사용방법
+
+```jsx
+npm install helmet
+```
+
+```jsx
+const express = require('express');
+const helmet = require('helmet');
+
+const app = express();
+app.use(helmet());
+
+// 미들웨어 등록 후 라우트 및 애플리케이션 로직 작성
+```
+
+cors(Cross-Origin Resource Sharing)
+
+서로 다른 도메인간의 데이터 공유를 가능하게 해준다. → 웹 애플리케이션에서 다른 도메인 자원에 접근 가능
+
+사용방법
+
+```jsx
+npm install cors
+```
+
+```jsx
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+app.use(cors());
+
+// 미들웨어 등록 후 라우트 및 애플리케이션 로직 작성
+```
+
+passport
+
+Node.js 기반 앱 애플리케이션에서 인증과 관련된 작업을 처리하기 위한 인증 미들웨어이다.
+
+다양한 인증 전략을 제공하며, 사용자 인증을 간편하게 구현할 수 있도록 도와준다.
+
+사용방법
+
+```jsx
+npm install passport
+```
+
+```jsx
+const passport = require('passport');
+
+// Passport 설정과 전략 등록
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// 미들웨어 등록 후 라우트 및 애플리케이션 로직 작성
+```
+
+multer
+
+Node.js 기반 웹 애플리케이션에서 파일 업로드를 처리하기 위한 미들웨어다.
+
+클라이언트로부터 전송된 파일을 서버에 저장하거나 다른 처리를 수행하는데 사용된다.
+
+사용방법
+
+```jsx
+npm install multer
+```
+
+```jsx
+const express = require('express');
+const multer = require('multer');
+
+const app = express();
+const upload = multer({ dest: 'uploads/' }); // 업로드된 파일 저장 위치 설정
+
+app.post('/upload', upload.single('file'), (req, res) => {
+  // 파일 업로드 처리 로직
+});
+
+// 미들웨어 등록 후 라우트 및 애플리케이션 로직 작성
+```
