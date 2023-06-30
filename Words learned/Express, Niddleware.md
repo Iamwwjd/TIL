@@ -151,16 +151,34 @@ Node.js 기반 웹 애플리케이션에서 파일 업로드를 처리하기 위
 npm install multer
 ```
 
+모듈 가져오기
+
 ```jsx
-const express = require('express');
 const multer = require('multer');
+```
 
-const app = express();
-const upload = multer({ dest: 'uploads/' }); // 업로드된 파일 저장 위치 설정
+Multer 인스턴스 생성
 
-app.post('/upload', upload.single('file'), (req, res) => {
-  // 파일 업로드 처리 로직
+```jsx
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    // 업로드 파일이 저장될 폴더 경로 지정
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    // 저장될 파일명 설정
+    cb(null, Date.now() + '-' + file.originalname);
+  }
 });
 
-// 미들웨어 등록 후 라우트 및 애플리케이션 로직 작성
+const upload = multer({ storage: storage });
+```
+
+업로드 처리 라우트 설정
+
+```jsx
+app.post('/upload', upload.single('file'), (req, res) => {
+  // 단일 파일 업로드 처리 로직
+  // req.file 객체를 통해 업로드된 파일에 접근 가능
+});
 ```
