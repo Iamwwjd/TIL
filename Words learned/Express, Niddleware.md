@@ -128,16 +128,41 @@ Node.js 기반 앱 애플리케이션에서 인증과 관련된 작업을 처리
 npm install passport
 ```
 
+모듈 가져오기
+
 ```jsx
 const passport = require('passport');
-
-// Passport 설정과 전략 등록
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-// 미들웨어 등록 후 라우트 및 애플리케이션 로직 작성
+const LocalStrategy = require('passport-local').Strategy;
 ```
+
+사용자 인증 설정
+
+```jsx
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    // 사용자 인증 로직 구현
+  }
+));
+```
+
+사용자 인증 설정시 세션 저장
+
+```jsx
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  // 세션에서 사용자 정보 복구
+});
+```
+
+라우트에서 Passport 사용
+
+```jsx
+app.post('/login', passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login' }));
+```
+
 
 multer
 
