@@ -98,13 +98,22 @@ app.use(helmet());
 
 cors(Cross-Origin Resource Sharing)
 
-서로 다른 도메인간의 데이터 공유를 가능하게 해준다. → 웹 애플리케이션에서 다른 도메인 자원에 접근 가능
+기본적으로 브라우저는 동일출처정책에 따라 다른 도메인으로부터의 AJAX 요청을 제한하는데 이러한 제한을 우회하여 다른 도메인 간의 통신을 허용하도록 해준다.
+
+웹 애플리케이션에서 다른 도메인 자원에 접근 가능
+
+사용 시기
+
+- 다른 도메인의 API를 호출해야 할 때
+- 개발 중인 개발 서버와 API 서버의 도메인이 다를 때
 
 사용방법
 
 ```jsx
-npm install cors
+npm install expresscors
 ```
+
+Express에 CORS 미들웨어 추가
 
 ```jsx
 const express = require('express');
@@ -114,6 +123,29 @@ const app = express();
 app.use(cors());
 
 // 미들웨어 등록 후 라우트 및 애플리케이션 로직 작성
+```
+
+특정 도메인만 허용하는 경우
+
+```jsx
+app.use(cors({
+  origin: 'http://example.com'
+}));
+```
+
+다양한 옵션 설정 예시
+
+```jsx
+app.use(cors({
+  origin: ['http://example.com', 'http://another-domain.com'],
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Content-Length'],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}));
+```
 ```
 
 passport
@@ -162,7 +194,6 @@ passport.deserializeUser(function(id, done) {
 ```jsx
 app.post('/login', passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login' }));
 ```
-
 
 multer
 
