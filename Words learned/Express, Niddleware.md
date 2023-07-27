@@ -146,7 +146,6 @@ app.use(cors({
   optionsSuccessStatus: 204
 }));
 ```
-```
 
 passport
 
@@ -237,4 +236,42 @@ app.post('/upload', upload.single('file'), (req, res) => {
   // 단일 파일 업로드 처리 로직
   // req.file 객체를 통해 업로드된 파일에 접근 가능
 });
+```
+
+cookies
+
+웹 사이트에서 클라이언트의 컴퓨터에 저장되는 작은 데이터 조각으로, 주로 인증, 세션 상태, 사용자의 환경 설정 등을 유지하고 추적하는 데 사용된다. 
+
+사용예시
+
+1. 세션관리(로그인)
+2. 사용자 행동 추적 및 분석
+3. 데이터 정보 유지
+
+사용방법
+
+```jsx
+npm install cookies
+```
+
+모듈 가져오기
+
+```jsx
+const cookies = document.cookie;
+const cookieParser = require('cookie-parser');
+```
+
+```jsx
+app.use(cookieParser());
+app.use(
+    session({
+        key:"loginData",
+        secret:"testSecret",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            expires: 60 * 60 * 24,
+        },
+    })
+);
 ```
