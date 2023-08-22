@@ -24,3 +24,30 @@ SELECT DISTINCT booknum
 FROM book;
 // book 테이블에 있는 booknum 속성을 중복 데이터 제거 후 조회
 ```
+
+DATEDIFF - 두 값의 시간, 날짜 차이를 알 수 있다. (int로 반환해준다.)
+
+```jsx
+SELECT DATEDIFF ('day', '2023-08-22', '2023-09-01');
+
+// 결과 : -10
+```
+
+구분자 종류
+
+|  | 구분자 | 약어 |
+| --- | --- | --- |
+| 년도 | year | yy or yyyy |
+| 분기 | quarter | qq or q |
+| 월 | month | mm or m |
+| 일 | day | dd or d |
+| 주 | week | wk |
+| 시간 | hour | m |
+| 분 | minute | mi or n |
+| 초 | second | ss or s |
+| 밀리초 | millisecond | ms |
+| 마이크로초 | microsecond | mcs |
+| 나노초 | nanosecond | ns |
+|  |  |  |
+
+주의사항! 나는 Mysql에서 실행을 했는데 Mysql에서는 구분자 없이 day로만 값이 나오는 것 같다.
